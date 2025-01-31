@@ -50,6 +50,36 @@ export const resolvers = {
             }
         },
 
+
+
+        getRestaurants: async (
+            _: unknown,
+            args: { ciudad: string },
+            context: context
+        ): Promise<RestauranteModel[]> => {
+            // Buscar restaurantes por ciudad
+            const results = await context.RestaurantesCollection.find({ ciudad: args.ciudad }).toArray()
+            if (results.length === 0) throw new GraphQLError("No hay restaurantes en esa ciudad")
+
+            return await Promise.all(
+                results.map(async (restaurante) => {
+                    const hora = await obtener_hora(restaurante.ciudad)
+                    return {
+                        _id: restaurante._id,
+                        nombre: restaurante.nombre,
+                        numero_telefono: restaurante.numero_telefono,
+                        direccion: restaurante.direccion,
+                        ciudad: restaurante.ciudad,
+                        hora
+                    }
+                })
+            )
+        },
+
+
+
+
+
         
         
         

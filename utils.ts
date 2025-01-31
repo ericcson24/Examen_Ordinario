@@ -53,7 +53,7 @@ export const obtener_climas = async (ciudad:string)=>{
     })
     if (data.status!==200) throw new GraphQLError("Error a la hora de procesar datos en api")
     const result:Api_Clima = await data.json()
-    return '${result.temp}'
+    return '${result.temp} grados'
 
 }
 

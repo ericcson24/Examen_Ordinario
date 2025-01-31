@@ -1,7 +1,6 @@
 import { ObjectId, OptionalId } from "mongodb";
 
 
-
 export type RestauranteModel =OptionalId<{
     nombre: string,
     direccion: string,
