@@ -1,7 +1,7 @@
 //funciones graphql
 import { Collection, ObjectId } from "mongodb";
 import { RestauranteModel,  } from "./types.ts";
-import { validar_telefono,obtener_hora } from "./utils.ts";
+import { validar_telefono,obtener_hora,obtener_climas } from "./utils.ts";
 import { GraphQLError } from "graphql";
 
 type context={
@@ -34,6 +34,7 @@ export const resolvers = {
             if(!result) throw new GraphQLError("No hay restaurante con ese id")
             
             const hora= await obtener_hora(result.ciudad)
+            const clima= await obtener_climas(result.ciudad)
             
             return{
                 _id:result._id,
@@ -43,7 +44,8 @@ export const resolvers = {
                 
                 ciudad:result.ciudad,
                  
-                hora 
+                hora ,
+                clima
                 
             }
         },

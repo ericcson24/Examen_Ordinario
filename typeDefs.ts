@@ -14,6 +14,6 @@ export const typeDefs = `#graphql
     }
     type Mutation{
         addRestaurant(nombre:String!,direccion: String!,ciudad: String!,numero_telefono: String!):RestauranteMode!
-        deleteRestaurant(id:String!)boolean!
+        deleteRestaurant(id:String!):Boolean!
     }
 `
