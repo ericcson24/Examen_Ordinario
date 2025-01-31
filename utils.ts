@@ -1,6 +1,6 @@
 import { GraphQLError } from "graphql"
-import { Api_Phone } from "./types.ts";
-import { graphql } from "graphql";
+import { Api_Phone,Api_HoraCiudad } from "./types.ts";
+
 
 const API_KEY = Deno.env.get("API_KEY")
 
@@ -23,3 +23,21 @@ export const validar_telefono = async (numero_telefono:string)=>{
     }
 }
 //api ubica
+
+export const obtener_hora = async (ciudad:string)=>{
+    if(!API_KEY) throw new GraphQLError("Error en la api key")
+
+    const url_validar= `https://api.api-ninjas.com/v1/worldtime?city=${ciudad}`
+
+    const data= await fetch(url_validar,{
+        headers:
+        {
+            'X-Api-Key': 'lRfqU6GzGK0Zp/kEMyXtCA==bikufMWIjnxu90yb'
+        }
+    })
+    if (data.status!==200) throw new GraphQLError("Error a la hora de procesar datos en api")
+    const result:Api_HoraCiudad = await data.json()
+    return result.datetime.split("")[1]
+}
+
+
