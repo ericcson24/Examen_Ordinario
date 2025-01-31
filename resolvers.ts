@@ -64,13 +64,16 @@ export const resolvers = {
             return await Promise.all(
                 results.map(async (restaurante) => {
                     const hora = await obtener_hora(restaurante.ciudad)
+                    const clima = await obtener_climas(restaurante.ciudad)
                     return {
                         _id: restaurante._id,
                         nombre: restaurante.nombre,
                         numero_telefono: restaurante.numero_telefono,
                         direccion: restaurante.direccion,
                         ciudad: restaurante.ciudad,
-                        hora
+                        hora,
+                        clima
+
                     }
                 })
             )
