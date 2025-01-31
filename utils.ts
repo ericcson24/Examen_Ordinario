@@ -22,7 +22,7 @@ export const validar_telefono = async (numero_telefono:string)=>{
         is_valid: result.is_valid
     }
 }
-//api ubica
+
 
 export const obtener_hora = async (ciudad:string)=>{
     if(!API_KEY) throw new GraphQLError("Error en la api key")
